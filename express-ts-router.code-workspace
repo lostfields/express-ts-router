@@ -35,7 +35,7 @@
 			"compilers": {
 				"ts": "ts-node/register"
 			}
-		},			
+		},
 		"mocha.files.glob": "src/test/*.ts",
 		"mocha.requires": [
 			"ts-node/register"
