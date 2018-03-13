@@ -1,0 +1,57 @@
+{
+	"folders": [
+		{
+			"name": "express-ts-router",
+			"path": "."
+		}
+	],
+	"settings": {
+		"launch": {
+			"version": "0.2.0",
+			"configurations": [
+				{
+					"name": "Launch mocha tests",
+					"type": "node",
+					"request": "launch",
+					"program": "${workspaceRoot:express-ts-router}/node_modules/mocha/bin/_mocha",
+					"stopOnEntry": false,
+					"args": ["--no-timeouts", "--compilers", "ts:ts-node/register", "${workspaceRoot:express-ts-router}/src/test/*.ts"],
+					"cwd": "${workspaceRoot:express-ts-router}",
+					"protocol": "inspector"
+				}
+			]
+		},
+		"files.exclude": {
+			"**/.git": true,
+			"**/.vscode": true,
+			"build": true,
+			"node_modules": true
+		},
+		"mocha.env": {
+			"TS_NODE_COMPILER": "${workspaceRoot}/node_modules/typescript/bin/tsc"
+		},
+		"typescript.tsdk": "./node_modules/typescript/lib",
+		"mocha.options": {
+			"compilers": {
+				"ts": "ts-node/register"
+			}
+		},			
+		"mocha.files.glob": "src/test/*.ts",
+		"mocha.requires": [
+			"ts-node/register"
+		],
+		//Mocha: this option allows you to enable/disable lens decorations and set update threshold "
+		"mocha.sideBarOptions": {
+			"default": {
+				"lens": true, // -> enable/disable lens
+				"decoration": true, // -> enable/disable decoration
+				"autoUpdateTime": 2000 // -> set timeout between each decorations and lens updates during test writing 
+			}
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			"maty.vscode-mocha-sidebar"
+		]
+	}
+}
