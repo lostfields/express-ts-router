@@ -1,7 +1,7 @@
 # express-ts-router
 A simple router to make it easy to use with Typescript when you have custom Request and Response interfaces.
 
-```
+```typescript
     import * as express from 'express'
 
     interface MyRequest extends express.Request {
@@ -21,7 +21,7 @@ A simple router to make it easy to use with Typescript when you have custom Requ
 
     
     let app = express()
-    
+
     app.use(router.getRouter())
 ```
 
