@@ -1,16 +1,16 @@
-import { Router as ExpressRouter, NextFunction, Request, Response, RequestHandler} from 'express'
+import * as Express from 'express'
 
 import { IRoute, Route } from './route'
 
-export class Router<TRequest extends Request, TResponse extends Response> {
+export class Router<TRequest extends Express.Request, TResponse extends Express.Response> {
     private _stack: Array<IRoute<TRequest, TResponse>> = []
     
-    private _extendRequest: (req: Request) => TRequest = null
-    private _extendResponse: (res: Response) => TRequest = null
-    private _handler: (req: Request, res: Response, next?: NextFunction) => void = null
+    private _extendRequest: (req: Express.Request) => TRequest = null
+    private _extendResponse: (res: Express.Response) => TRequest = null
+    private _handler: (req: Express.Request, res: Express.Response, next?: Express.NextFunction) => void = null
 
     public constructor(extendRequest: (req: Request) => TRequest, extendResponse: (req: Response) => TResponse) 
-    public constructor(handler?: (req: Request, res: Response, next?: NextFunction) => void)
+    public constructor(handler?: (req: Request, res: Response, next?: Express.NextFunction) => void)
     public constructor() { //handler: (req: TRequest, res: TResponse, next: NextFunction) => void) {
         if(typeof arguments[0] == 'function') 
             switch(arguments[0].length) {
@@ -34,13 +34,13 @@ export class Router<TRequest extends Request, TResponse extends Response> {
         return route;
     }
 
-    public getRouter(): ExpressRouter {
-        let router = ExpressRouter()
+    public getRouter(): Express.Router {
+        let router = Express.Router()
 
         for(let route of this._stack) {
             let path = route.path
 
-            router.use((req: Request, res: Response, next: NextFunction) => {
+            router.use((req: Express.Request, res: Express.Response, next: Express.NextFunction) => {
                 let ex: Error
 
                 try {
