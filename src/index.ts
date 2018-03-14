@@ -1,3 +1,5 @@
-import { Router as ExpressRouter, NextFunction, Request, Response, RequestHandler} from 'express'
+import { Router as CoreRouter, Request, Response } from 'express'
+import { Router } from './express/router'
 
-export { Router } from './express/router'
+export default Router
+export { Router, CoreRouter, Request, Response }
