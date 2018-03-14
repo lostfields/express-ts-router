@@ -1,41 +1,46 @@
 import * as assert from 'assert'
+import { agent } from 'supertest'
 
-import { Request, Response } from 'express'
+import * as express from 'express'
 import { Router } from './../index'
 
-describe("When using tests", () => {
+let app = express(),
+    router = new Router()
 
-    let router: Router<IRequest, Response>
+router.route('/')
+    .get((req, res) => {
+        res.status(200).send([{ user: '321' }, { user: '321' }])
+    })
+
+router.route('/:id')
+    .get((req, res) => {
+        res.status(200).send({ user: req.params['id'] })
+    });
+
+app.use('/users', router.getRouter())
+
+
+describe('When using a plain router', () => {
 
     beforeEach(() => {
 
-        router = new Router<IRequest, Response>( (req) => {
-            return Object.assign({}, req, {
-                user: {
-                    id: Number(req.params['x-user-id']) || 0
-                }
-            })
-        }, (res) => res)
-
     })
 
-    it("should work", () => {
+    it('should route GET for /users', async () => {
+        let response = await agent(app)
+            .get('/users')
+            .expect('Content-Type', /json/)
+            .expect(200)
 
-        router.route('/')
-            .get( (req, res, next) => {
-                
-            })
+        assert.equal(response.body.length, 2)
+    })
 
-        assert.ok(true)
+    it('should route GET for /users/123', async () => {
+        let response = await agent(app)
+            .get('/users/123')
+            .expect('Content-Type', /json/)
+            .expect(200)
+
+        assert.equal(response.body.user, '123')
     })
 })
-
-
-interface IRequest extends Request {
-    /**
-     * your user
-     */
-    readonly user: {
-        readonly id: number
-    }
-}
