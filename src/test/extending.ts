@@ -2,15 +2,14 @@ import * as assert from 'assert'
 import { agent } from 'supertest'
 
 import * as express from 'express'
-import { Request, Response } from 'express'
 import { Router } from './../index'
 
-interface IRequest extends Request {
+interface IRequest extends express.Request {
     userId: number
 }
 
 let app = express(),
-    router = new Router<IRequest, Response>((req) => {
+    router = new Router<IRequest, express.Response>((req) => {
         return Object.assign(req, { 
             userId: Number(req.headers['x-user-id']) || 0
         })

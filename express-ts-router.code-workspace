@@ -24,6 +24,7 @@
 		"files.exclude": {
 			"**/.git": true,
 			"**/.vscode": true,
+			"lib": true,
 			"build": true,
 			"node_modules": true
 		},
