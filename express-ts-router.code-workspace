@@ -17,7 +17,8 @@
 					"stopOnEntry": false,
 					"args": ["--no-timeouts", "--compilers", "ts:ts-node/register", "${workspaceRoot:express-ts-router}/src/test/*.ts"],
 					"cwd": "${workspaceRoot:express-ts-router}",
-					"protocol": "inspector"
+					"protocol": "inspector",
+					"trace": true
 				}
 			]
 		},
