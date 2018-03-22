@@ -3,3 +3,10 @@ import { Router } from './express/router'
 
 export default Router
 export { Router, CoreRouter, Request, Response }
+
+// test
+let router = new Router();
+
+if(router) {
+    
+}
