@@ -63,21 +63,29 @@ export class Model<T extends Model<T>>  {
                 if(descriptor.get)
                     value = descriptor.get.call(target)
 
-                switch(typeof value) {
-                    case 'object':
-                        if(descriptor.value instanceof Date == false) {
-                            if(descriptor.set) 
-                                descriptor.set.call(target, Model.apply(value, source[property]))
+                if(value !== undefined && value !== null) {
+                    switch(value.constructor) {
+                        case Function:
+                            break
+                
+                        case Array:
+                        case Date:
+                        case Boolean:
+                        case Number:
+                        case String:
+                            descriptor.set.call(target, source[property])
+                            break
+            
+                        case Object:
+                        default:
+                            descriptor.set.call(target, this.apply(value, source[property]))
+                            break
+                    }
 
-                            break;
-                        }
-                        
-                    default:
-                        if (descriptor.set /*&& descriptor.get.call(this) == undefined*/) {
-                            // property of destination is writable
-                            descriptor.set.call(target, source[property]);
-                        }
+                    continue
                 }
+    
+                descriptor.set.call(target, source[property]);
             }
         }
 
