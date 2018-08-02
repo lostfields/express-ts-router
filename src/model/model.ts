@@ -78,7 +78,12 @@ export class Model<T extends Model<T>>  {
             
                         case Object:
                         default:
-                            descriptor.set.call(target, this.apply(value, source[property]))
+                            if(typeof source[property] == 'object') {
+                                descriptor.set.call(target, this.apply(value, source[property]))
+                            }
+                            else {
+                                descriptor.set.call(target, source[property])
+                            }
                             break
                     }
 
