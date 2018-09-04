@@ -1,24 +1,27 @@
 {
     "name": "express-ts-router",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "ExpressJs Promise Router for Typescript and Javascript",
     "author": "Lostfields",
     "license": "MIT",
+    "scripts": {
+        "test": "mocha --require ts-node/register ./src/test/*.ts",
+        "release": "cross-var \"tsc && git add --force ./lib/ && git commit -a -m $npm_package_version && git tag -a $npm_package_version -m $npm_package_version && git push origin $npm_package_version && git checkout origin\""
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/lostfields/express-ts-router.git"
     },
     "main": "./lib/index",
     "typings": "./lib/index",
-    "dependencies": {
-        "@types/express": "^4.0.35"
-    },
     "devDependencies": {
+        "@types/express": "^4.0.35",
         "@types/mocha": "^2.2.41",
         "@types/node": "^8.5.3",
         "@types/supertest": "^2.0.4",
+        "cross-var": "^1.1.0",
         "express": "^4.14.0",
-        "mocha": "^4.1.0",
+        "mocha": "^5.2.0",
         "supertest": "^3.0.0",
         "ts-node": "^4.1.0",
         "typescript": "~2.6.2"
