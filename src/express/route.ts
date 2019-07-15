@@ -83,6 +83,9 @@ function asyncHandler<TRequest extends Express.Request, TResponse extends Expres
             let ret = fn(req, res, (err) => { 
                 nexted = true
                 ex = err
+
+                if((ret instanceof Promise) == false)
+                    next(err)
             })
 
             if(ret instanceof Promise)

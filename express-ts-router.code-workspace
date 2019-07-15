@@ -25,7 +25,7 @@
 					"request": "launch",
 					"program": "${workspaceRoot:express-ts-router}/node_modules/mocha/bin/_mocha",
 					"stopOnEntry": false,
-					"args": ["--no-timeouts", "--compilers", "ts:ts-node/register", "${workspaceRoot:express-ts-router}/src/test/*.ts"],
+					"args": ["--no-timeouts", "--require", "ts-node/register", "${workspaceRoot:express-ts-router}/src/test/*.ts"],
 					"cwd": "${workspaceRoot:express-ts-router}",
 					"protocol": "inspector",
 					"trace": true
@@ -43,11 +43,6 @@
 			"TS_NODE_COMPILER": "${workspaceRoot}/node_modules/typescript/bin/tsc"
 		},
 		"typescript.tsdk": "./node_modules/typescript/lib",
-		"mocha.options": {
-			"compilers": {
-				"ts": "ts-node/register"
-			}
-		},
 		"mocha.files.glob": "src/test/*.ts",
 		"mocha.requires": [
 			"ts-node/register"
