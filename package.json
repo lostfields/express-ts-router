@@ -1,6 +1,6 @@
 {
     "name": "express-ts-router",
-    "version": "1.0.5",
+    "version": "1.0.2",
     "description": "ExpressJs Promise Router for Typescript and Javascript",
     "author": "Lostfields",
     "license": "MIT",
