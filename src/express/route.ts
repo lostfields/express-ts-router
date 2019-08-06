@@ -77,6 +77,7 @@ export class Route<TRequest extends Express.Request, TResponse extends Express.R
 function asyncHandler<TRequest extends Express.Request, TResponse extends Express.Response>(fn: (request: Express.Request, response: Express.Response, next?: Express.NextFunction) => any) {
     return async (req: TRequest, res: TResponse, next: Express.NextFunction) => {
         let nexted = false,
+            promisble = false,
             ex: Error
 
         try {
@@ -84,11 +85,11 @@ function asyncHandler<TRequest extends Express.Request, TResponse extends Expres
                 nexted = true
                 ex = err
 
-                if((ret instanceof Promise) == false)
+                if(promisble == false)
                     next(err)
             })
-
-            if(ret instanceof Promise)
+            
+            if((promisble = (ret instanceof Promise)) == true)
                 await ret
             
             if(nexted)
