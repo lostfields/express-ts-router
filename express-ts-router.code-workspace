@@ -23,10 +23,10 @@
 					"name": "Launch mocha tests",
 					"type": "node",
 					"request": "launch",
-					"program": "${workspaceRoot:express-ts-router}/node_modules/mocha/bin/_mocha",
+					"program": "${workspaceFolder:express-ts-router}/node_modules/mocha/bin/_mocha",
 					"stopOnEntry": false,
 					"args": ["--no-timeouts", "--require", "ts-node/register", "${workspaceRoot:express-ts-router}/src/test/*.ts"],
-					"cwd": "${workspaceRoot:express-ts-router}",
+					"cwd": "${workspaceFolder:express-ts-router}",
 					"protocol": "inspector",
 					"trace": true
 				}
@@ -39,14 +39,13 @@
 			"build": true,
 			"node_modules": true
 		},
-		"mocha.env": {
-			"TS_NODE_COMPILER": "${workspaceRoot}/node_modules/typescript/bin/tsc"
-		},
+		
 		"typescript.tsdk": "./node_modules/typescript/lib",
 		"mocha.files.glob": "src/test/*.ts",
 		"mocha.requires": [
 			"ts-node/register"
 		],
+		"mocha.runTestsOnSave": "false",
 		//Mocha: this option allows you to enable/disable lens decorations and set update threshold "
 		"mocha.sideBarOptions": {
 			"default": {

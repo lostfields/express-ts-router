@@ -9,8 +9,8 @@ export class Router<TRequest extends Express.Request, TResponse extends Express.
     private _extendResponse: (res: Express.Response) => TRequest = null
     private _handler: (req: Express.Request, res: Express.Response, next?: Express.NextFunction) => void = null
 
-    public constructor(extendRequest: (req: Request) => TRequest, extendResponse: (req: Response) => TResponse) 
-    public constructor(handler?: (req: Request, res: Response, next?: Express.NextFunction) => void)
+    public constructor(extendRequest: (req: Express.Request) => TRequest, extendResponse: (req: Express.Response) => TResponse) 
+    public constructor(handler?: (req: Express.Request, res: Express.Response, next?: Express.NextFunction) => void)
     public constructor() { //handler: (req: TRequest, res: TResponse, next: NextFunction) => void) {
         if(typeof arguments[0] == 'function') 
             switch(arguments[0].length) {
